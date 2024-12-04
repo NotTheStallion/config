@@ -1,0 +1,18 @@
+[user]
+	name = The_Stallion
+	email = 111058733+NotTheStallion@users.noreply.github.com
+
+[push]
+    default    = matching
+
+[pull]
+    ff = only
+
+[alias]
+    fall = fetch --all -p
+    grep = grep -n 
+    ci  = commit
+    st  = status -s
+    co  = checkout
+    glog = log --graph --oneline --decorate=short --exclude='backup/*' --branches='*' --tags='*' 
+    fa = fetch --all -p
