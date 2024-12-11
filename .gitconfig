@@ -3,7 +3,7 @@
 	email = 111058733+NotTheStallion@users.noreply.github.com
 
 [push]
-    default    = matching
+    default = matching
 
 [pull]
     ff = only
@@ -12,7 +12,10 @@
     fall = fetch --all -p
     grep = grep -n 
     ci  = commit
+    cm = commit -m
     st  = status -s
     co  = checkout
-    glog = log --graph --oneline --decorate=short --exclude='backup/*' --branches='*' --tags='*' 
-    fa = fetch --all -p
+    glog = log --graph --oneline --decorate=short --exclude='backup/*' --branches='*' --tags='*'
+
+[core]
+	hookspath = ~/config/git_hooks
