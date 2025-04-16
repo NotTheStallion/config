@@ -1,0 +1,58 @@
+#!/bin/sh
+
+# @Note : Remove the .sample suffix to enable this hook
+
+echo "Running prepare-commit hook"
+
+COMMIT_MSG_FILE=$1
+COMMIT_SOURCE=$2
+SHA1=$3
+
+
+
+# /usr/bin/perl -i.bak -ne 'print unless(m/^. Please enter the commit message/..m/^#$/)' "$COMMIT_MSG_FILE"
+
+# If @DNC is found in any staged changes, prevent the commit
+if git diff --staged | egrep -i '@dnc|@donotcommit' -qE; then
+    echo "Your staged changes include DONOTCOMMIT"
+    exit 1
+fi
+
+# Add edited, deleted, or added files to the commit message
+# files=$(git diff --cached --name-status | awk '{print $1 " " $2}')
+# if [ -n "$files" ]; then
+#     echo "$files" | while read -r status file; do
+#         case "$ " in
+#             A) echo "A $file" >> "$COMMIT_MSG_FILE" ;;
+#             M) echo "M $file" >> "$COMMIT_MSG_FILE" ;;
+#             D) echo "D $file" >> "$COMMIT_MSG_FILE" ;;
+#         esac
+#     done
+# fi
+
+
+# Modify the Version: line in *.el files to match the commit date
+# set -eEuo pipefail
+
+# date=$(date +%Y%m%d%H%M)  
+
+# # Enumerate *.el files that have been edited for this commit
+# git diff-index --name-only --cached -z HEAD |
+#     grep -z '\.el$' |
+#     while read -r -d '' fn
+#     do
+#         # Patch index
+#         blob_sha1=$(git show :"$fn" |
+#                         sed "s/^;; Version:  .*/;; Version:  $date/" |
+#                         git hash-object -w --stdin)
+#         printf '100644 blob %s\t%s\0' "$blob_sha1" "$fn" |
+#             git update-index -z --index-info
+
+#         # Patch working tree to match index
+#         sed -i "s/^;; Version:  .*/;; Version:  $date/" "$fn"
+#     done
+
+
+echo "Commit message file: $COMMIT_MSG_FILE"
+echo "Commit source: $COMMIT_SOURCE"
+echo "SHA1: $SHA1"
