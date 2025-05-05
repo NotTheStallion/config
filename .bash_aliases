@@ -24,6 +24,3 @@ alias j='jobs -l'
 
 # Alias conda
 alias condad='conda deactivate'
-
-
-

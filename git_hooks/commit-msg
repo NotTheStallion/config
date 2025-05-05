@@ -56,7 +56,7 @@ EOF
 # Trim leading comma/space and prepend to commit message
 CHANGES=$(echo "$CHANGES" | sed 's/^, //')
 if [ -n "$CHANGES" ]; then
-    COMMIT_MSG="$CHANGES : $COMMIT_MSG"
+    COMMIT_MSG="$COMMIT_MSG : $CHANGES"
     echo "$COMMIT_MSG" > "$COMMIT_MSG_FILE"
     echo "$COMMIT_MSG_FILE"
 fi
